@@ -4,59 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YouTube to MP3 Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 50px 20px;
+      background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
     }
-    h1 {
-      color: #ffdf00;
-    }
-    input {
-      width: 80%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #ffdf00;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    iframe {
-      margin-top: 30px;
-      width: 100%;
-      height: 150px;
-      border: none;
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
 <body>
-  <h1>YouTube to MP3 Converter</h1>
-  <p>Paste your YouTube video link below:</p>
-  <input type="text" id="videoUrl" placeholder="https://www.youtube.com/watch?v=...">
-  <br>
-  <button onclick="convertToAudio()">Convert</button>
-  <div id="output"></div>
+  <div class="glass rounded-2xl p-8 shadow-xl w-full max-w-md text-center text-white">
+    <h1 class="text-2xl font-bold text-yellow-400 mb-3">🎧 YouTube to MP3</h1>
+    <p class="text-gray-300 mb-6">Paste your YouTube link below to convert and download as MP3.</p>
+    
+    <input id="videoUrl" type="text" placeholder="https://www.youtube.com/watch?v=..."
+      class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-yellow-400 outline-none mb-4"
+    />
+    
+    <button onclick="convertToAudio()"
+      class="w-full bg-yellow-400 text-black font-semibold py-3 rounded-lg hover:bg-yellow-300 transition duration-300">
+      Convert to MP3
+    </button>
+
+    <div id="output" class="mt-6"></div>
+
+    <footer class="mt-8 text-xs text-gray-500">
+      © 2025 Belok’s Converter | Powered by <a href="https://api.vevioz.com" class="text-yellow-400 hover:underline">Vevioz API</a>
+    </footer>
+  </div>
 
   <script>
     function convertToAudio() {
       const url = document.getElementById('videoUrl').value.trim();
+      const output = document.getElementById('output');
       if (!url) {
-        alert('Please enter a YouTube video link');
+        alert('Please enter a YouTube link!');
         return;
       }
-      const output = document.getElementById('output');
-      output.innerHTML = `<iframe src="https://api.vevioz.com/api/button/mp3/${encodeURIComponent(url)}"></iframe>`;
+      output.innerHTML = `
+        <iframe src="https://api.vevioz.com/api/button/mp3/${encodeURIComponent(url)}"
+                class="w-full h-32 mt-4 border-none rounded-lg"></iframe>`;
     }
   </script>
 </body>
